@@ -22,14 +22,14 @@ input, button, select, textarea {
     height: 60px;
 }
 
-#header{
+#header, #header div{
     line-height: 60px;
     background-color: whiteSmoke;
 }
 
 #header .site-title{
     margin:0px;
-    padding:0px 50px;
+    padding:0px 0px 0px 50px;
     line-height: 60px;
     display:block;
     float:left;
@@ -37,7 +37,6 @@ input, button, select, textarea {
 
 #header .account-info{
     text-align:right;
-    padding-right: 50px;
 }
 
 #footer {
@@ -68,4 +67,15 @@ ul.errorlist, ul.errorlist li{
 .center-area{
     max-width: 600px;
     margin: 20px auto;
+}
+.record-row {
+    min-height: 50px;
+    line-height: 50px;
+    border-bottom: 1px solid #eeefff;
+}
+.record-row:hover {
+    background-color: #ffffee;
+}
+.record-row-last {
+    border-bottom: 1px solid #fff;
 }

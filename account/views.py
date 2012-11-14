@@ -12,7 +12,7 @@ from django.db import transaction
 
 #from account.forms import RegisterForm, ContactForm, UserProfileChangeForm
 from account.models import ContactAddress
-from account.forms import RegisterForm, LoginForm
+from account.forms import RegisterForm, LoginForm, ContactAddressForm
 
 
 def register(request):
@@ -52,4 +52,61 @@ def home(request):
     return shortcuts.render_to_response('account/home.html',
                                         {'addresses': addresses},
                                         context_instance=RequestContext(request))
+
+
+@login_required
+@transaction.commit_on_success
+def add_address(request):
+    if request.POST:
+        form = ContactAddressForm(request.POST)
+        if form.is_valid():
+            addr = form.save(request.user)
+            
+            if addr.is_default:
+                setdefault_address(request, addr.id)
+                
+            messages.success(request, u'新的送货地址保存成功。')
+            return shortcuts.redirect(reverse('account-home')) 
+    else:
+        form = ContactAddressForm()
+        
+    return shortcuts.render_to_response('account/address.html',
+                                        {'form': form},
+                                        context_instance=RequestContext(request))
     
+@login_required
+def edit_address(request, address_id):
+    c = shortcuts.get_object_or_404(ContactAddress, id=address_id, user=request.user)
+    if request.POST:
+        form = ContactAddressForm(request.POST, instance=c)
+        if form.is_valid():
+            addr = form.save(request.user)
+            if addr.is_default:
+                setdefault_address(request, addr.id)
+            messages.success(request, u'送货地址更改成功。')
+            return shortcuts.redirect(reverse('account-home'))
+    else:
+        form = ContactAddressForm(instance=c)
+    return shortcuts.render_to_response('account/address.html',
+                                        {'form': form},
+                                        context_instance=RequestContext(request))
+
+@login_required
+def delete_address(request, address_id):
+    c = shortcuts.get_object_or_404(ContactAddress, id=address_id, user=request.user)
+    c.delete()
+    messages.success(request, u'送货地址成功删除。')
+    return shortcuts.redirect(reverse('account-home'))
+
+
+@login_required
+@transaction.commit_on_success
+def setdefault_address(request, address_id):
+    c = shortcuts.get_object_or_404(ContactAddress, id=address_id, user=request.user)
+    
+    ContactAddress.objects.filter(user=request.user, is_default=True).update(is_default=False)
+    
+    c.is_default = True
+    c.save()
+    messages.success(request, u'默认的送货地址更改成功。')
+    return shortcuts.redirect(reverse('account-home'))

@@ -1,10 +1,37 @@
 {% extends '_base.html' %}
 
 {% block content %}
-<h3>送货地址</h3>
+
+<div class="row">
+    <div class="span8"><h3>送货地址</h3></div>
+    <div class="span4 pagination-right"><a class="btn btn-primary" href="{% url account-address-add %}">添加送货地址</a></div>
+</div>
+
 {% for a in addresses %}
-    <p> {{a}} </p>
+<div class="row record-row{% if forloop.last %} record-row-last{% endif %}">
+    <div class="span7">
+        {% if a.is_default %}
+            <strong>{{a}}</strong>
+        {% else %}
+            {{a}}
+        {% endif %}
+    </div>
+    <div class="span5">
+        <div class="btn-group">
+          <a href="{% url account-address-edit a.id %}" class="btn btn-info">编辑</a>
+          {% if not a.is_default %}
+            <a href="{% url account-address-setdefault a.id %}" class="btn btn-success">设为默认</a>
+          {% endif %}
+          <a href="{% url account-address-delete a.id %}" class="btn btn-danger">删除</a>
+        </div>
+    </div>
+</div>
 {% empty %}
-<span class="muted">你没有保存过送货地址。</span>
+<div class="row record-row record-row-last">
+    <div class="span12">
+        <span class="muted">你没有保存过送货地址。</span> &nbsp; <a class="btn btn-primary" href="{% url account-address-add %}">现在就添加送货地址</a>
+    </div>
+</div>
 {% endfor %}
+
 {% endblock content %}

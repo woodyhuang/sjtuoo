@@ -7,13 +7,13 @@ from django.contrib.auth.forms import AuthenticationForm
 from account.models import ContactAddress
 
 
-class ContactForm(forms.ModelForm):
+class ContactAddressForm(forms.ModelForm):
     class Meta:
         model = ContactAddress
-        exclude = ('user', 'is_default') 
+        exclude = ('user',) 
     
     def save(self, user, commit=True):
-        contact = super(ContactForm, self).save(commit=False)
+        contact = super(ContactAddressForm, self).save(commit=False)
         contact.user = user
         
         if commit:

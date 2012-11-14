@@ -1,0 +1,21 @@
+{% extends '_base.html' %}
+
+{% block content %}
+
+<form method="POST" class="form-horizontal center-area"
+    action="{% if form.instance.id %}{% url account-address-edit form.instance.id %}{% else %}{% url account-address-add %}{% endif %}">
+    
+    <fieldset>
+        <legend>{% if form.instance.id %}增加{% else %}编辑{% endif %}送货地址</legend>
+        
+        {% csrf_token %}
+        
+        {% include '_form.html' %}
+        
+        <div class="form-actions">
+            <a href="{% url account-home %}" class="btn">取消</a>
+            <button type="submit" class="btn btn-primary">提交</button>
+        </div>
+    </fieldset>
+</form>
+{% endblock content %}
