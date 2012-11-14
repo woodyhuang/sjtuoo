@@ -1,0 +1,10 @@
+{% extends '_base.html' %}
+
+{% block content %}
+<h3>送货地址</h3>
+{% for a in addresses %}
+    <p> {{a}} </p>
+{% empty %}
+<span class="muted">你没有保存过送货地址。</span>
+{% endfor %}
+{% endblock content %}

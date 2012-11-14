@@ -4,14 +4,16 @@ from django.conf.urls.defaults import patterns, include, url
 from django.contrib import admin
 admin.autodiscover()
 
+from django import template
+template.add_to_builtins('common.mytags')
+
+
 urlpatterns = patterns('',
-    # Examples:
-    # url(r'^$', 'oosjtu.views.home', name='home'),
-    # url(r'^oosjtu/', include('oosjtu.foo.urls')),
-
-    # Uncomment the admin/doc line below to enable admin documentation:
      url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
-
-    # Uncomment the next line to enable the admin:
      url(r'^admin/', include(admin.site.urls)),
+     
+    # home 
+    url(r'^$', 'django.views.generic.simple.direct_to_template', {'template': 'index.html'}, name='home'),
+    
+    url(r'^account/', include('account.urls')),
 )

@@ -1,0 +1,71 @@
+html,body {
+    height: 100%;
+    /* The html and body elements cannot have any padding or margin. */
+    font-family: "微软雅黑", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+input, button, select, textarea {
+    font-family: "微软雅黑", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+/* Wrapper for page content to push down footer */
+#wrap {
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    /* Negative indent footer by it's height */
+    margin: 0 auto -60px;
+}
+
+/* Set the fixed height of the footer here */
+#header, #push, #footer {
+    height: 60px;
+}
+
+#header{
+    line-height: 60px;
+    background-color: whiteSmoke;
+}
+
+#header .site-title{
+    margin:0px;
+    padding:0px 50px;
+    line-height: 60px;
+    display:block;
+    float:left;
+}
+
+#header .account-info{
+    text-align:right;
+    padding-right: 50px;
+}
+
+#footer {
+    background-color: #f5f5f5;
+}
+
+#main-content{
+    padding-top: 30px;
+}
+/* Lastly, apply responsive CSS fixes as necessary */
+@media ( max-width : 767px) {
+    #footer {
+        margin-left: -20px;
+        margin-right: -20px;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+}
+
+/* --------- stick foot end ------------- */
+
+ul.errorlist, ul.errorlist li{
+    display: inline-block;
+    list-style-type: none;
+    padding:0px;
+    margin:0px;
+}
+.center-area{
+    max-width: 600px;
+    margin: 20px auto;
+}

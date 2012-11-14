@@ -1,0 +1,20 @@
+{% extends '_base.html' %}
+
+{% block content %}
+<form method="post" action="{% url account-register %}" class="form-horizontal center-area">
+    <fieldset>
+        <legend>注册新账号</legend>
+        
+        {% csrf_token %}
+        
+        {% include '_form.html' %}
+        
+        <input type="hidden" name="next" value="{{ next }}" />
+        
+        <div class="form-actions">
+            <a href="{% url home %}" class="btn">取消</a>
+            <button type="submit" class="btn btn-primary">创建新账号</button>
+        </div>
+    </fieldset>
+</form>
+{% endblock content %}

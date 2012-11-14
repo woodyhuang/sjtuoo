@@ -1,0 +1,22 @@
+{% extends '_base.html' %}
+
+{% block content %}
+
+<form method="post" action="{% url account-login %}" class="form-horizontal center-area">
+    <fieldset>
+        <legend>请输入用户名和密码</legend>
+        
+        {% csrf_token %}
+        
+        {% include '_form.html' %}
+        
+        <input type="hidden" name="next" value="{{ next }}" />
+        
+        <div class="form-actions">
+            <a href="{% url account-register %}" class="btn">注册新账号</a>
+            <button type="submit" class="btn btn-primary">登录</button>
+        </div>
+    </fieldset>
+</form>
+
+{% endblock content %}
