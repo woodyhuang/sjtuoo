@@ -1,4 +1,4 @@
-# Django settings for oosjtu project.
+#coding: utf-8
 
 import os
 
@@ -125,6 +125,8 @@ INSTALLED_APPS = (
      'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
      'django.contrib.admindocs',
+     
+     'account',
 )
 
 # A sample logging configuration. The only tangible logging
