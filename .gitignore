@@ -1,0 +1,8 @@
+*.pyc
+*.db
+/.project
+/.pydevproject
+/.settings
+*.mo
+*.log
+/local_settings.py
