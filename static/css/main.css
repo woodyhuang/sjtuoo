@@ -35,6 +35,11 @@ input, button, select, textarea {
     float:left;
 }
 
+.site-title a{
+    text-decoration: none;
+    color: #333;
+}
+
 #header .account-info{
     text-align:right;
 }
