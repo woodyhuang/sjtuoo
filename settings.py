@@ -138,6 +138,7 @@ INSTALLED_APPS = (
      
      'common',
      'account',
+     'product',
 )
 
 LOGIN_REDIRECT_URL = '/account/'
