@@ -31,10 +31,23 @@
       <div class="clearfix"></div>
       <!-- Begin page content -->
       <div class="container" id="main-content">
-        {% include '_messages.html' %}
-        
-        {% block content %}
-        {% endblock %}
+        <div class="row">
+            <div class="span2 well">
+                <ul class="nav nav-list">
+                  <li class="nav-header">商品分类</li>
+                  {% for c in categories %}
+                      <li id="nav_c_{{ c.id }}"><a href="#">{{ c }}</a></li>
+                  {% endfor %}
+                  <li class="divider"></li>
+                  <li><a href="{% url product-list %}">全部商品</a></li>
+                </ul>
+            </div>
+            <div class="span10">
+                {% include '_messages.html' %}
+                {% block content %}
+                {% endblock %}
+            </div>
+        </div>
       </div>
 
       <div id="push"></div>

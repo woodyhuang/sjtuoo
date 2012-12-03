@@ -6,9 +6,9 @@ from django.template import RequestContext
 from product.models import ProductCategory
 
 
-def list_category(request):
-    product_categories = ProductCategory.objects.all()
+def index(request):
+    products = []
     
-    return shortcuts.render_to_response('product/category_list.html',
-                            {'product_categories': product_categories},
+    return shortcuts.render_to_response('index.html',
+                            {'products': products},
                             context_instance=RequestContext(request))
