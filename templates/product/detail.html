@@ -1,0 +1,28 @@
+{% extends '_base.html' %}
+
+{% block content %}
+
+<h1>{{ product.name }}</h1>
+<div class="row-fluid">
+    <div class="span5">
+        <img class="img-polaroid" src="/static/{{ product.image }}">
+    </div>
+    <div class="span6 offset1">
+        <p>商品编号：{{ product.id }}</p>
+        <p>价格：<span class="label label-important">{{ product.price|asmoney }}</span></p>
+        <p>发布时间：{{ product.created_time }}</p>
+        <p>所属类别：<a href="{% url product-list %}?cid={{ product.category.id }}">{{ product.category }}</a></p>
+        <p>商品评分：<span class="badge">6</span></p>
+        <p>商品评论：<span class="badge">100</span>条评论</p>
+        <p><a class="btn btn-large btn-primary" href="#">加入购物车</a></p>
+    </div>
+</div>
+<hr>
+<h3>商品详情</h3>
+<p>
+    {{ product.description|safe }}
+</p>
+<hr>
+<h3>商品评论</h3>
+<p><span class="muted">暂无评论</span></p>
+{% endblock %}

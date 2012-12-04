@@ -50,6 +50,7 @@ input, button, select, textarea {
 
 #main-content{
     padding-top: 30px;
+    padding-bottom: 50px;
 }
 /* Lastly, apply responsive CSS fixes as necessary */
 @media ( max-width : 767px) {
@@ -83,4 +84,7 @@ ul.errorlist, ul.errorlist li{
 }
 .record-row-last {
     border-bottom: 1px solid #fff;
+}
+.thumb-img {
+    width: 100px;
 }

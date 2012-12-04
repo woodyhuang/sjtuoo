@@ -36,13 +36,13 @@
                 <ul class="nav nav-list">
                   <li class="nav-header">商品分类</li>
                   {% for c in categories %}
-                      <li id="nav_c_{{ c.id }}"><a href="#">{{ c }}</a></li>
+                      <li id="nav_{{ c.id }}"><a href="{% url product-list %}?cid={{ c.id }}">{{ c }}</a></li>
+                  {% empty %}
+                      <li><em>暂无商品</em></li> 
                   {% endfor %}
-                  <li class="divider"></li>
-                  <li><a href="{% url product-list %}">全部商品</a></li>
                 </ul>
             </div>
-            <div class="span10">
+            <div class="span9">
                 {% include '_messages.html' %}
                 {% block content %}
                 {% endblock %}
@@ -62,5 +62,14 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="/static/js/jquery.js"></script>
     <script src="/static/js/bootstrap.min.js"></script>
+    
+    {% if category_id %}
+    <script>
+    // to hignlight nav bar
+    $(function(){
+        $('#nav_{{ category_id }}').addClass('active');
+    });
+    </script>
+    {% endif %}
   </body>
 </html>
