@@ -27,7 +27,11 @@ class Order(models.Model):
         verbose_name_plural = u'订单'
     
     def __unicode__(self):
-        return u'订单  %d' % self.id
+        return self.number
+
+    @property
+    def number(self):
+        return 'OSN-%d' % self.id
 
 
 class OrderItem(models.Model):
@@ -43,4 +47,8 @@ class OrderItem(models.Model):
     
     def __unicode__(self):
         return self.product.name
+    
+    @property
+    def amount(self):
+        return self.count * self.price
     

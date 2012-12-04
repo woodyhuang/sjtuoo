@@ -8,7 +8,30 @@
 <hr>
 
 {% for o in orders %}
-    {{ o }}<br>
+    <div class="row-fluid">
+        <div class="span2">
+            <a href="{% url order-detail o.id %}"> {{ o.number }} </a>
+        </div>
+        <div class="span2">
+            {{ o.get_status_display }}
+        </div>
+        <div class="span3">
+            {{ o.created_time }}
+        </div>
+        <div class="span3">
+            {{ o.amount|asmoney }}
+        </div>
+        <div class="2">
+            <a class="btn" href="{% url order-detail o.id %}">详细情况</a>
+        </div>
+    </div>
+    {% if not forloop.last %}
+        <hr>
+    {% endif %}
+{% empty %}
+<p class="muted">
+                        你还没有订购过商品。<a class="btn btn-primary" href="{% url product-list %}">马上去购物&raquo;</a>
+</p>
 {% endfor %}
 
 {% endblock %}

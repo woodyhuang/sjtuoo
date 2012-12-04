@@ -1,7 +1,62 @@
-{% extends '_base.html' %}
+{% extends 'account/_base.html' %}
+
+{% block order_nav %}class="active"{% endblock %}
 
 {% block content %}
-<h2>我的订单</h2>
-{{ order }}
+<div class="row-fluid">
+    <div class="span6">
+        <h3>订单详情</h3>
+    </div>
+    <div class="span6">
+        <a class="btn btn-danger pull-right" href="{% url order-detail order.id %}">取消订单</a>
+    </div>
+</div>
+
+<hr>
+<p>
+    <span class="muted">编号：</span> {{ order.number }}
+</p>
+<p>
+    <span class="muted">状态：</span> {{ order.get_status_display }}
+</p>
+<p>
+    <span class="muted">建于：</span> {{ order.created_time }}
+</p>
+<p>
+    <strong><span>总计：</span> <span class="text-error">{{ order.amount|asmoney }}</span></strong>
+</p>
+<p>
+    <span class="muted">送货地址：</span> {{ order.address }}
+</p>
+{% if order.description %}
+<p>
+    <span style="vertical-align:top;" class="muted">额外说明：</span>
+    <textarea disabled rows="3" class="span5">{{ order.description }}</textarea>
+</p>
+{% endif %}
+
+<hr>
+{% for item in order.orderitem_set.select_related %}
+    <div class="row-fluid">
+        <div class="span2">
+            <a href="{% url product-detail item.product.id %}">
+                <img class="thumb-img-cart img-rounded" src="/static/{{ item.product.image }}">
+            </a>
+        </div>
+        <div class="span5">
+            <a href="{% url product-detail item.product.id %}">{{ item.product.name }}</a>
+            <br> <span class="label">{{ item.price|asmoney }}</span>
+        </div>
+        <div class="span2">
+            {{ item.count }}
+        </div>
+        <div class="span2">
+            <span class="text-error">{{ item.amount|asmoney }}</span>
+        </div>
+    </div>
+    {% if not forloop.last %}
+        <hr>
+    {% endif %}
+{% endfor %}
 
 {% endblock %}
