@@ -15,5 +15,12 @@
         </div>
     </div>
     {% if not forloop.last %}<hr>{% endif %}
+    
+{% empty %}
+<p class="muted">
+                       没有商品:(
+      <br><br>
+                       好懒的管理员啊~~
+</p>
 {% endfor %}
 {% endblock %}
