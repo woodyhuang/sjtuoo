@@ -10,7 +10,7 @@ from django.db import transaction
 from account.models import ContactAddress
 from product.models import Product
 from order.models import Order, OrderItem
-from order.forms import ShoppingCardForm
+from order.forms import ShoppingCartForm
 
 
 @login_required
@@ -23,7 +23,7 @@ def my_order(request):
 @login_required
 def generate(request):
     if request.POST:
-        cart = ShoppingCardForm(request)
+        cart = ShoppingCartForm(request)
         address_id = request.POST.get('address', '')
         address = shortcuts.get_object_or_404(ContactAddress, id=address_id, user=request.user)
         
@@ -75,7 +75,7 @@ def add_item(request):
     
     product = shortcuts.get_object_or_404(Product, id=product_id)
     
-    cart = ShoppingCardForm(request)
+    cart = ShoppingCartForm(request)
     cart.set_product(product, count)
     cart.store(request)
     
@@ -84,7 +84,7 @@ def add_item(request):
 
 
 def remove_item(request, product_id):
-    cart = ShoppingCardForm(request)
+    cart = ShoppingCartForm(request)
     cart.remove_product(product_id)
     cart.store(request)
     

@@ -3,7 +3,7 @@
 from django.conf import settings
 
 
-class ShoppingCardForm:
+class ShoppingCartForm:
     """
     Not use classic Django form for less cache in session.
     Use this to display shopping card and store in session.
