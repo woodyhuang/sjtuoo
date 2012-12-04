@@ -9,12 +9,12 @@ from product.models import Product
 def index(request):
     products = Product.objects.filter()
     
-    category_id = request.GET.get('cid', '')
+    category_id = request.GET.get('cid', 0)
     if category_id:
         products = products.filter(category=category_id)
     
     return shortcuts.render_to_response('index.html',
-                    {'products': products, 'category_id': category_id},
+                    {'products': products, 'category_id': int(category_id)},
                     context_instance=RequestContext(request))
 
 

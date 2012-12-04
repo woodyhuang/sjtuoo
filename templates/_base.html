@@ -20,11 +20,11 @@
   <body>
     <!-- Part 1: Wrap all page content here -->
     <div id="wrap">
-      <div id="header" class="row">
+      <div id="header" class="row-fluid">
           <div class="span6">
               <h2 class="site-title"><a href="/" title="首页">xx网购系统</a></h2>
           </div>
-          <div class="span6">
+          <div class="span6 account-info">
               {% include '_account_bar.html' %}
           </div>
       </div>
@@ -37,7 +37,7 @@
                   {% block extra_menu %}{% endblock %}
                   <li class="nav-header">商品分类</li>
                   {% for c in categories %}
-                      <li id="nav_{{ c.id }}"><a href="{% url product-list %}?cid={{ c.id }}">{{ c }}</a></li>
+                      <li {% if category_id == c.id %} class="active"{% endif %}><a href="{% url product-list %}?cid={{ c.id }}">{{ c }}</a></li>
                   {% empty %}
                       <li><em>暂无商品</em></li> 
                   {% endfor %}
@@ -63,14 +63,5 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="/static/js/jquery.js"></script>
     <script src="/static/js/bootstrap.min.js"></script>
-    
-    {% if category_id %}
-    <script>
-    // to hignlight nav bar
-    $(function(){
-        $('#nav_{{ category_id }}').addClass('active');
-    });
-    </script>
-    {% endif %}
   </body>
 </html>
