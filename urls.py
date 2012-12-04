@@ -17,5 +17,5 @@ urlpatterns = patterns('',
     
     url(r'^account/', include('account.urls')),
     
-    url(r'^product/category/$', 'product.views.list_product', name='product-list'),
+    url(r'^product/list/$', 'product.views.list_product', name='product-list'),
 )
