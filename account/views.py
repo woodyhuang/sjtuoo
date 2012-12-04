@@ -66,7 +66,7 @@ def add_address(request):
                 setdefault_address(request, addr.id)
                 
             messages.success(request, u'新的送货地址保存成功。')
-            return shortcuts.redirect(reverse('account-home')) 
+            return shortcuts.redirect(reverse('account-address-list')) 
     else:
         form = ContactAddressForm()
         
@@ -84,7 +84,7 @@ def edit_address(request, address_id):
             if addr.is_default:
                 setdefault_address(request, addr.id)
             messages.success(request, u'送货地址更改成功。')
-            return shortcuts.redirect(reverse('account-home'))
+            return shortcuts.redirect(reverse('account-address-list'))
     else:
         form = ContactAddressForm(instance=c)
     return shortcuts.render_to_response('account/address.html',
@@ -96,7 +96,7 @@ def delete_address(request, address_id):
     c = shortcuts.get_object_or_404(ContactAddress, id=address_id, user=request.user)
     c.delete()
     messages.success(request, u'送货地址成功删除。')
-    return shortcuts.redirect(reverse('account-home'))
+    return shortcuts.redirect(reverse('account-address-list'))
 
 
 @login_required
@@ -109,4 +109,4 @@ def setdefault_address(request, address_id):
     c.is_default = True
     c.save()
     messages.success(request, u'默认的送货地址更改成功。')
-    return shortcuts.redirect(reverse('account-home'))
+    return shortcuts.redirect(reverse('account-address-list'))
