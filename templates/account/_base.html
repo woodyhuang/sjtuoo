@@ -1,0 +1,9 @@
+{% extends '_base.html' %}
+
+{% block extra_menu %}
+
+<li class="nav-header">我的账户</li>
+<li {% block order_nav %}{% endblock %}><a href="{% url account-order-list %}">我的订单</a></li>
+<li {% block address_nav %}{% endblock %}><a href="{% url account-address-list %}">我的送货地址</a></li>
+<li class="divider"></li>
+{% endblock extra_menu %}

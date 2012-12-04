@@ -36,21 +36,23 @@ def login(request):
                       template_name='account/login.html',
                       authentication_form=LoginForm) # just show 'Email' as label for username
 
-
 @login_required
 def logout(request):
     do_logout(request)
     return shortcuts.redirect(reverse('home'))
 
 
-@login_required
 def home(request):
+    return shortcuts.redirect(reverse('account-order-list'))
+
+
+@login_required
+def list_address(request):
     addresses = ContactAddress.objects.filter(user=request.user)
     
-    return shortcuts.render_to_response('account/home.html',
+    return shortcuts.render_to_response('account/address_list.html',
                                         {'addresses': addresses},
                                         context_instance=RequestContext(request))
-
 
 @login_required
 @transaction.commit_on_success

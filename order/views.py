@@ -14,6 +14,13 @@ from order.forms import ShoppingCardForm
 
 
 @login_required
+def my_order(request):
+    return shortcuts.render_to_response('order/list.html',
+                    {'orders': Order.objects.all()},
+                    context_instance=RequestContext(request))
+    
+
+@login_required
 def generate(request):
     if request.POST:
         cart = ShoppingCardForm(request)

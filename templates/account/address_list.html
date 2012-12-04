@@ -1,14 +1,17 @@
-{% extends '_base.html' %}
+{% extends 'account/_base.html' %}
+
+{% block address_nav %}class="active"{% endblock %}
 
 {% block content %}
 
-<div class="row">
-    <div class="span8"><h3>送货地址</h3></div>
+<div class="row-fluid">
+    <div class="span8"><h3>送货地址列表</h3></div>
     <div class="span4 pagination-right"><a class="btn btn-primary" href="{% url account-address-add %}">添加送货地址</a></div>
 </div>
+<hr>
 
 {% for a in addresses %}
-<div class="row record-row{% if forloop.last %} record-row-last{% endif %}">
+<div class="row-fluid record-row{% if forloop.last %} record-row-last{% endif %}">
     <div class="span7">
         {% if a.is_default %}
             <strong>{{a}}</strong>

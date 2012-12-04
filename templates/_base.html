@@ -34,6 +34,7 @@
         <div class="row">
             <div class="span2 well">
                 <ul class="nav nav-list">
+                  {% block extra_menu %}{% endblock %}
                   <li class="nav-header">商品分类</li>
                   {% for c in categories %}
                       <li id="nav_{{ c.id }}"><a href="{% url product-list %}?cid={{ c.id }}">{{ c }}</a></li>

@@ -1,13 +1,15 @@
-{% extends '_base.html' %}
+{% extends 'account/_base.html' %}
+
+{% block address_nav %}class="active"{% endblock %}
 
 {% block content %}
+<h3>{% if form.instance.id %}编辑{% else %}增加{% endif %}送货地址</h3>
+<hr>
 
-<form method="POST" class="form-horizontal center-area"
+<form method="POST" class="form-horizontal"
     action="{% if form.instance.id %}{% url account-address-edit form.instance.id %}{% else %}{% url account-address-add %}{% endif %}">
     
     <fieldset>
-        <legend>{% if form.instance.id %}增加{% else %}编辑{% endif %}送货地址</legend>
-        
         {% csrf_token %}
         
         {% include '_form.html' %}

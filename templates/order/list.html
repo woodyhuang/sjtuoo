@@ -1,0 +1,14 @@
+{% extends 'account/_base.html' %}
+
+{% block order_nav %}class="active"{% endblock %}
+
+{% block content %}
+
+<h3>订单列表</h3>
+<hr>
+
+{% for o in orders %}
+    {{ o }}<br>
+{% endfor %}
+
+{% endblock %}
