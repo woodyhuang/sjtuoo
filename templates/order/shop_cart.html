@@ -13,9 +13,9 @@
         </div>
         <div class="span3">
             <a href="{% url product-detail pid %}">{{ p.name }}</a>
-            <br> <span class="text-error">{{ p.price|asmoney }}</span>
+            <br> <span class="label">{{ p.price|asmoney }}</span>
         </div>
-        <div class="span4">
+        <div class="span3">
             <form action="{% url order-item-add %}" method="POST">{% csrf_token %}
                 <input type="hidden" value="{{ pid }}" name="pid">
                 <div class="input-append">
@@ -25,13 +25,16 @@
             </form>
         </div>
         <div class="span2">
+            <strong><span class="text-error">{{ p.amount|asmoney }}</span></strong>
+        </div>
+        <div class="span2">
             <a href="{% url order-item-remove pid %}" class="btn btn-danger">删除</a>
         </div>
     </div>
     <hr>
 {% empty %}
     <p class="muted">
-                            你还没有订购商品。<a class="btn btn-primary" href="{% url product-list %}">马上去购物</a>
+                            你还没有订购商品。<a class="btn btn-primary" href="{% url product-list %}">马上去购物&raquo;</a>
     </p>
 {% endfor %}
 
@@ -44,7 +47,7 @@
 <hr>
 <div>
     <a class="btn pull-left" href="{% url product-list %}">继续购物</a>
-    <a class="btn btn-large btn-primary pull-right" href="#">现在去结算</a>
+    <a class="btn btn-large btn-primary pull-right" href="{% url order-generate %}">现在去结算&raquo;</a>
 </div>
 {% endif %}
 

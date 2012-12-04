@@ -19,7 +19,7 @@ class ContactAddress(models.Model):
         verbose_name_plural = u'送货地址'
 
     def __unicode__(self):
-        return u'%(name)s(%(phone)s) @ %(address)s， %(post_code)s' % {
+        return u'%(name)s(%(phone)s)， %(address)s， %(post_code)s' % {
                                'name': self.contact_name,
                                'phone': self.phone,
                                'address': self.address,

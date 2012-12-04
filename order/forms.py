@@ -33,16 +33,22 @@ class ShoppingCardForm:
         self.products['%s' % product.id] = {'name': product.name,
                                      'count': count,
                                      'price': product.price,
+                                     'amount': count * product.price,
                                      'thumbnail': str(product.image)}
         
     def update_price(self):
         self.amount = 0
         for p in self.products.itervalues():
-            self.amount += p['price'] * p['count']
+            self.amount += p['amount']
     
     def store(self, request):
         self.update_price()
         request.session[settings.SHOP_CART_KEY] = {'amount': self.amount,
                                                    'products': self.products}
     
-    
+    def delete(self, request):
+        try:
+            del request.session[settings.SHOP_CART_KEY]
+        except:
+            pass
+        

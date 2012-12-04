@@ -42,5 +42,5 @@ class OrderItem(models.Model):
         verbose_name_plural = u'所购商品'
     
     def __unicode__(self):
-        return self.product
+        return self.product.name
     

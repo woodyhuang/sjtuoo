@@ -8,9 +8,11 @@ class OrderItemInline(admin.TabularInline):
 
 
 class OrderAdmin(admin.ModelAdmin):
+    list_display = ('id', 'owner', 'amount', 'created_time')
     inlines = [
         OrderItemInline,
     ]
+    raw_id_fields = ('owner', 'address')
 
 
 admin.site.register(Order, OrderAdmin)

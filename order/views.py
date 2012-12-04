@@ -3,22 +3,57 @@
 from django import shortcuts
 from django.template import RequestContext
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from django.core.urlresolvers import reverse
+from django.db import transaction
 
+from account.models import ContactAddress
 from product.models import Product
+from order.models import Order, OrderItem
 from order.forms import ShoppingCardForm
 
 
-def index(request):
-    products = Product.objects.filter()
+@login_required
+def generate(request):
+    if request.POST:
+        cart = ShoppingCardForm(request)
+        address_id = request.POST.get('address', '')
+        address = shortcuts.get_object_or_404(ContactAddress, id=address_id, user=request.user)
+        
+        with transaction.commit_on_success():
+            order = Order(owner=request.user,
+                          address=address,
+                          description=request.POST.get('description', ''),
+                          amount=cart.amount)
+            order.save()
+            
+            for pid, p in cart.products.iteritems():
+                OrderItem(order=order,
+                           product=shortcuts.get_object_or_404(Product, id=pid),
+                           price=p['price'],
+                           count=p['count']
+                           ).save()
+                           
+            cart.delete(request)
+            messages.success(request, u'下单成功！请等待系统确认。')
+            return shortcuts.redirect(reverse('order-detail', args=[order.id]))
     
-    category_id = request.GET.get('cid', '')
-    if category_id:
-        products = products.filter(category=category_id)
+    addresses = ContactAddress.objects.filter(user=request.user)
+    if not addresses:
+        messages.error(request, u'你还没有送货地址，请创建至少一个送货地址。')
+        return shortcuts.redirect(reverse('account-address-add'))
     
-    return shortcuts.render_to_response('index.html',
-                    {'products': products, 'category_id': category_id},
+    return shortcuts.render_to_response('order/generate.html',
+                    {'addresses': addresses},
                     context_instance=RequestContext(request))
 
+
+def detail(request, order_id):
+    order = shortcuts.get_object_or_404(Order, id=order_id)
+    return shortcuts.render_to_response('order/detail.html',
+                    {'order': order},
+                    context_instance=RequestContext(request))
+    
 
 def add_item(request):
     product_id = request.REQUEST.get('pid', '')

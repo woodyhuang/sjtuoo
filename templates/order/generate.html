@@ -1,0 +1,61 @@
+{% extends '_base.html' %}
+
+{% block content %}
+
+<form action="{% url order-generate %}" method="POST">{% csrf_token %}
+<h2>请确认订单内容</h2>
+
+<hr>
+<strong>请选择送货地址：</strong>
+<p>
+{% for addr in addresses %}
+    <label class="radio">
+        <input type="radio" name="address" value="{{ addr.id }}"{% if addr.is_default %} checked{% endif %}> {{ addr }}
+    </label>
+{% endfor %}
+</p>
+
+<hr>
+订单说明：
+<p>
+<textarea rows="3" class="span5" name="description" placeholder="比如送货要求：请于周末下午送货。"></textarea>
+</p>
+
+<hr>
+{% for pid, p in shop_cart.products.items %}
+    <div class="row-fluid">
+        <div class="span2">
+            <a href="{% url product-detail pid %}">
+                <img class="thumb-img-cart img-rounded" src="/static/{{ p.thumbnail }}">
+            </a>
+        </div>
+        <div class="span5">
+            <a href="{% url product-detail pid %}">{{ p.name }}</a>
+            <br> <span class="label">{{ p.price|asmoney }}</span>
+        </div>
+        <div class="span2">
+            {{ p.count }}
+        </div>
+        <div class="span2">
+            <strong><span class="text-error">{{ p.amount|asmoney }}</span></strong>
+        </div>
+    </div>
+    <hr>
+{% empty %}
+    <p class="muted">
+                            你还没有订购商品。<a class="btn btn-primary" href="{% url product-list %}">马上去购物</a>
+    </p>
+{% endfor %}
+<p class="lead">
+    <strong class="pull-right">总计：<span class="text-error">{{ shop_cart.amount|asmoney }}</span></strong>
+</p>
+<div class="clearfix"></div>
+
+<hr>
+<div>
+    <a class="btn pull-left" href="{% url order-shop-cart %}">&laquo;上一步</a>
+    <button class="btn btn-large btn-primary pull-right" type="submit">生成订单</button>
+</div>
+</form>
+
+{% endblock %}
