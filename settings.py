@@ -143,10 +143,13 @@ INSTALLED_APPS = (
      'common',
      'account',
      'product',
+     'order',
 )
 
+# project settings
 LOGIN_REDIRECT_URL = '/account/'
 LOGIN_URL = '/account/login/'
+SHOP_CART_KEY = 'session-shopping-cart'
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to

@@ -6,11 +6,9 @@ from django.core.urlresolvers import reverse
 from django.contrib import messages
 from django.contrib.auth import logout as do_logout, login as do_login, authenticate
 from django.contrib.auth.views import login as login_view
-from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.decorators import login_required
 from django.db import transaction
 
-#from account.forms import RegisterForm, ContactForm, UserProfileChangeForm
 from account.models import ContactAddress
 from account.forms import RegisterForm, LoginForm, ContactAddressForm
 

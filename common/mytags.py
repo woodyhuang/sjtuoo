@@ -15,7 +15,7 @@ def asmoney(amount):
     try:
         if isinstance(amount, str) or isinstance(amount, unicode):
             amount = float(amount)
-        return '%s%s' % (floatformat(amount, 2), u'元')
+        return u'￥%s%s' % (floatformat(amount, 2), u'元')
     except:
         return amount
     

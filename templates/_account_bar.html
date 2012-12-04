@@ -1,5 +1,14 @@
+
+<div class="btn-group pull-right btn-shop-cart">
+    <a class="btn{% if shop_cart.products %} btn-info{% endif %}" href="{% url order-shop-cart %}">
+        <i class="icon-shopping-cart{% if shop_cart.products %} icon-white{% endif %}"></i> 购物车（{{shop_cart.products|length}}）
+    </a>
+</div>
+
+<span class="pull-right">
 {% if request.user.is_authenticated %}
   欢迎 <a title="查看我的账户" href="{% url account-home %}">{{ request.user.username }}</a> | <a href="{% url account-logout %}">注销</a>
 {% else %}
 欢迎光临，<a href="{% url account-login %}">登录</a> | <a href="{% url account-register %}" class="light">注册</a>
 {% endif %}
+</span>

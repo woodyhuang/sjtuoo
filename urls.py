@@ -17,4 +17,5 @@ urlpatterns = patterns('',
     
     url(r'^account/', include('account.urls')),
     url(r'^product/', include('product.urls')),
+    url(r'^order/', include('order.urls')),
 )

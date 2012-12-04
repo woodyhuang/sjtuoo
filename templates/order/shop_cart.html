@@ -1,0 +1,51 @@
+{% extends '_base.html' %}
+
+{% block content %}
+
+<h2>我的购物车</h2>
+<hr>
+{% for pid, p in shop_cart.products.items %}
+    <div class="row-fluid">
+        <div class="span2">
+            <a href="{% url product-detail pid %}">
+                <img class="thumb-img-cart img-rounded" src="/static/{{ p.thumbnail }}">
+            </a>
+        </div>
+        <div class="span3">
+            <a href="{% url product-detail pid %}">{{ p.name }}</a>
+            <br> <span class="text-error">{{ p.price|asmoney }}</span>
+        </div>
+        <div class="span4">
+            <form action="{% url order-item-add %}" method="POST">{% csrf_token %}
+                <input type="hidden" value="{{ pid }}" name="pid">
+                <div class="input-append">
+                  <input value="{{ p.count }}" class="input-mini" name="count" type="text">
+                  <button class="btn" type="submit">更新数量</button>
+                </div>
+            </form>
+        </div>
+        <div class="span2">
+            <a href="{% url order-item-remove pid %}" class="btn btn-danger">删除</a>
+        </div>
+    </div>
+    <hr>
+{% empty %}
+    <p class="muted">
+                            你还没有订购商品。<a class="btn btn-primary" href="{% url product-list %}">马上去购物</a>
+    </p>
+{% endfor %}
+
+{% if shop_cart.products %}
+<p class="lead">
+    <strong class="pull-right">总计：<span class="text-error">{{ shop_cart.amount|asmoney }}</span></strong>
+</p>
+<div class="clearfix"></div>
+
+<hr>
+<div>
+    <a class="btn pull-left" href="{% url product-list %}">继续购物</a>
+    <a class="btn btn-large btn-primary pull-right" href="#">现在去结算</a>
+</div>
+{% endif %}
+
+{% endblock %}

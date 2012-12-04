@@ -14,7 +14,7 @@
         <p>所属类别：<a href="{% url product-list %}?cid={{ product.category.id }}">{{ product.category }}</a></p>
         <p>商品评分：<span class="badge">6</span></p>
         <p>商品评论：<span class="badge">100</span>条评论</p>
-        <p><a class="btn btn-large btn-primary" href="#">加入购物车</a></p>
+        <p><a class="btn btn-large btn-primary" href="{% url order-item-add %}?pid={{ product.id }}">加入购物车</a></p>
     </div>
 </div>
 <hr>

@@ -11,7 +11,7 @@
         <div class="span9">
             <a href="{% url product-detail p.id %}">{{ p }}</a>
             <br> <span class="label label-info">{{ p.price|asmoney }}</span> &nbsp; 发布于{{ p.created_time }}
-            <a class="btn pull-right" href="#">加入购物车</a>
+            <a class="btn pull-right" href="{% url order-item-add %}?pid={{ p.id }}">加入购物车</a>
         </div>
     </div>
     {% if not forloop.last %}<hr>{% endif %}
