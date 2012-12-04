@@ -11,6 +11,7 @@ from django.db import transaction
 
 from account.models import ContactAddress
 from account.forms import RegisterForm, LoginForm, ContactAddressForm
+from order.forms import ShoppingCartForm
 
 
 def register(request):
@@ -36,9 +37,12 @@ def login(request):
                       template_name='account/login.html',
                       authentication_form=LoginForm) # just show 'Email' as label for username
 
-@login_required
 def logout(request):
+    cart = ShoppingCartForm(request)
+    
     do_logout(request)
+    
+    cart.store(request)
     return shortcuts.redirect(reverse('home'))
 
 
