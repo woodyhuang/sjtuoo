@@ -4,7 +4,12 @@
 
 <h3>下面是所有已定义的产品类别</h3>
 {% for pc in product_categories %}
+
+    <div> 
+    <p><img src={{pc.imgurl}}></p>
     <p>{{ pc.name }}</p>
+    <p>{{ pc.price }}</p>
+    </div>
 {% endfor %}
 
 {% endblock %}
