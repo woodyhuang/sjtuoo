@@ -25,11 +25,14 @@ def generate(request):
     if request.POST:
         cart = ShoppingCartForm(request)
         address_id = request.POST.get('address', '')
+        if not address_id:
+            messages.error(request, u'请选择一个送货地址。')
+            return shortcuts.redirect(reverse('order-generate'))
         address = shortcuts.get_object_or_404(ContactAddress, id=address_id, user=request.user)
         
         with transaction.commit_on_success():
             order = Order(owner=request.user,
-                          address=address,
+                          address=str(address),
                           description=request.POST.get('description', ''),
                           amount=cart.amount)
             order.save()

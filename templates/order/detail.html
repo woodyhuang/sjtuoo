@@ -17,7 +17,7 @@
     <span class="muted">编号：</span> {{ order.number }}
 </p>
 <p>
-    <span class="muted">状态：</span> {{ order.get_status_display }}
+    <span class="muted">状态：</span> <span class="text-success">{{ order.get_status_display }}</span>
 </p>
 <p>
     <span class="muted">建于：</span> {{ order.created_time }}

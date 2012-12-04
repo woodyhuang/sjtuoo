@@ -5,6 +5,7 @@ from order.models import Order, OrderItem
 
 class OrderItemInline(admin.TabularInline):
     model = OrderItem
+#    raw_id_fields = ('product',)
 
 
 class OrderAdmin(admin.ModelAdmin):
@@ -12,7 +13,7 @@ class OrderAdmin(admin.ModelAdmin):
     inlines = [
         OrderItemInline,
     ]
-    raw_id_fields = ('owner', 'address')
+    raw_id_fields = ('owner',)
 
 
 admin.site.register(Order, OrderAdmin)
