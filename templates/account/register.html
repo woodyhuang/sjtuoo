@@ -1,10 +1,11 @@
 {% extends '_base.html' %}
 
 {% block content %}
-<form method="post" action="{% url account-register %}" class="form-horizontal center-area">
+<h3>注册新账号</h3>
+<hr>
+
+<form method="post" action="{% url account-register %}" class="form-horizontal">
     <fieldset>
-        <legend>注册新账号</legend>
-        
         {% csrf_token %}
         
         {% include '_form.html' %}

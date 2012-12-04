@@ -66,10 +66,6 @@ ul.errorlist, ul.errorlist li{
     padding:0px;
     margin:0px;
 }
-.center-area{
-    max-width: 600px;
-    margin: 20px auto;
-}
 .record-row {
     min-height: 50px;
     line-height: 50px;

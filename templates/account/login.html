@@ -1,11 +1,11 @@
 {% extends '_base.html' %}
 
 {% block content %}
+<h3>用户登录</h3>
+<hr>
 
-<form method="post" action="{% url account-login %}" class="form-horizontal center-area">
+<form method="post" action="{% url account-login %}" class="form-horizontal">
     <fieldset>
-        <legend>请输入用户名和密码</legend>
-        
         {% csrf_token %}
         
         {% include '_form.html' %}

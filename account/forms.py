@@ -25,7 +25,7 @@ class ContactAddressForm(forms.ModelForm):
 class LoginForm(AuthenticationForm):
     """ Just change label name for username, cause we use email as username.
     """
-    username = forms.EmailField(label=u'用户名（邮箱）')
+    username = forms.EmailField(label=u'邮箱')
 
 
 class RegisterForm(forms.ModelForm):
