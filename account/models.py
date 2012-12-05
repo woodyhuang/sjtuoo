@@ -14,7 +14,7 @@ class ContactAddress(models.Model):
     
     class Meta:
         db_table = 'account_contact'
-#        app_label = u'账号额外信息'
+        app_label = u'账号额外信息'
         verbose_name = u'送货地址'
         verbose_name_plural = u'送货地址'
 

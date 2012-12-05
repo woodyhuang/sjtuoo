@@ -7,9 +7,11 @@
     <div class="span6">
         <h3>订单详情</h3>
     </div>
+    {% if order.is_new %}
     <div class="span6">
         <a class="btn btn-danger pull-right" href="{% url order-detail order.id %}">取消订单</a>
     </div>
+    {% endif %}
 </div>
 
 <hr>

@@ -7,7 +7,7 @@ from product.models import Product
 
 
 ORDER_STATUS = (('1', u'新提交'),
-                  ('2', u'确认，商品出库'),
+                  ('2', u'商品出库'),
                   ('3', u'等待收货'),
                   ('4', u'完成'),
                   )
@@ -24,6 +24,7 @@ class Order(models.Model):
         db_table = 'order'
         verbose_name = u'订单'
         verbose_name_plural = u'订单'
+        app_label = u'客户订单'
     
     def __unicode__(self):
         return self.number
@@ -31,6 +32,10 @@ class Order(models.Model):
     @property
     def number(self):
         return 'OSN-%d' % self.id
+    
+    @property
+    def is_new(self):
+        return '1' == self.status
 
 
 class OrderItem(models.Model):

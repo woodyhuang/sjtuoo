@@ -10,6 +10,7 @@ class ProductCategory(models.Model):
         db_table = 'product_category'
         verbose_name = u'产品类别'
         verbose_name_plural = u'产品类别'
+        app_label = u'产品'
     
     def __unicode__(self):
         return self.name
@@ -27,6 +28,7 @@ class Product(models.Model):
         db_table = 'product'
         verbose_name = u'产品'
         verbose_name_plural = u'产品'
+        app_label = u'产品'
     
     def __unicode__(self):
         return self.name
