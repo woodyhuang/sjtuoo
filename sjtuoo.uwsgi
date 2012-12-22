@@ -1,0 +1,5 @@
+[uwsgi]
+socket = 127.0.0.1:8880
+chdir = /opt/demo/sjtuoo
+pythonpath = /opt/demo
+module = django_wsgi
